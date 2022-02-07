@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 export default makeStyles((props) => ({
   container: {
     backgroundColor: 'black',
-    height: '100%',
+    height: 'auto',
     width: '300px',
     color: 'white',
     paddingTop: '24px',

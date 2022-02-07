@@ -47,7 +47,7 @@ export const SpotifySearchItem = async (query) => {
   };
 
   let data = {
-    q: 'miley cyrus',
+    q: query,
     type: 'track,artist',
     include_external: 'audio',
     limit: 10,
