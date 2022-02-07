@@ -11,7 +11,7 @@ const NavBar = () => {
   const [activeTab, setActiveTab] = useState('Home');
   return (
     <div className={classes.container}>
-      <img
+      {/* <img
         src="https://i.ibb.co/7R2Nf0x/logo.png"
         alt="logo"
         style={{
@@ -20,7 +20,7 @@ const NavBar = () => {
           paddingLeft: '24px',
           marginBottom: '18px',
         }}
-      />
+      /> */}
       <nav>
         <div className={classes.links}>
           <Link
@@ -60,7 +60,6 @@ const NavBar = () => {
 };
 
 const MenuTab = (props) => {
-  console.log(JSON.stringify(props));
   const styleProps = { color: props.active ? 'white' : '#212121' };
   const classes = useStyles(styleProps);
   return (
