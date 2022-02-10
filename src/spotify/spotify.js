@@ -48,7 +48,7 @@ export const SpotifySearchItem = async (query) => {
 
   let data = {
     q: query,
-    type: 'track,artist',
+    type: 'track,artist,album',
     include_external: 'audio',
     limit: 10,
   };

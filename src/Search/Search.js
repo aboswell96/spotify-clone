@@ -1,70 +1,73 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SpotifySearchItem } from '../spotify/spotify';
 import useStyles from './styles.js';
+
+import { TopResult, TopSongs } from './Items';
 
 const Search = () => {
   const classes = useStyles();
   const [query, setQuery] = useState('');
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  //search input
   const [searchValue, setSearchValue] = useState('');
+
   const onChange = (e) => {
     setSearchValue(e.target.value);
+
+    if (e.target.value === '') {
+      setQuery('');
+    }
 
     if (e.target.value.length > 0) {
       SpotifySearchItem(e.target.value)
         .then((response) => {
           setQuery(response);
+          console.log(response);
         })
         .catch((error) => {
-          setError(true);
+          setQuery('');
           console.log('Failed to query ' + error);
         });
     }
   };
 
-  //TODO: why does switching line 16 and 17 not work?
-  useEffect(() => {
-    SpotifySearchItem('miley cyrus')
-      .then((response) => {
-        setQuery(response);
-        setIsLoading(false);
-        console.log(response);
-      })
-      .catch((error) => {
-        setError(true);
-        console.log('Failed to query ' + error);
-      });
-  }, []);
-
-  useEffect(() => {
-    console.log(
-      'render isLoading ' + isLoading + ' query ' + Object.entries(query).length
-    );
-  });
-
   return (
     <div className={classes.container}>
       <SearchBar value={searchValue} onChange={onChange} />
-      <div className={classes.tracks}>
-        {!isLoading &&
-          !error &&
-          Object.entries(query).length > 0 &&
-          query.data.tracks.items.map((item, j) => {
-            return <span key={j}>{item.name}</span>;
-          })}
+      <div style={{ display: 'flex', gap: '30px' }}>
+        {query &&
+          query.data &&
+          query.data.artists &&
+          query.data.artists.items.length > 0 && (
+            <TopResult artist={query.data.artists.items[0]} />
+          )}
+        {query &&
+          query.data &&
+          query.data.tracks &&
+          query.data.tracks.items.length > 0 && (
+            <TopSongs tracks={query.data.tracks.items} />
+          )}
       </div>
-      {error && <span>Failed to Query - Spotify did not reply</span>}
+      {searchValue &&
+        query &&
+        query.data &&
+        query.data.artists.items.length === 0 && (
+          <span className={classes.displayText}>No Results Found</span>
+        )}
+      {!searchValue && (
+        <span className={classes.displayText}>Start typing to Search...</span>
+      )}
     </div>
   );
 };
 
 const SearchBar = (props) => {
+  const classes = useStyles();
   return (
-    <div>
-      <input value={props.value} onChange={props.onChange}></input>
+    <div style={{ marginBottom: '30px' }}>
+      <input
+        className={classes.search}
+        value={props.value}
+        onChange={props.onChange}
+      ></input>
     </div>
   );
 };

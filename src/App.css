@@ -16,3 +16,8 @@ body {
   font-family: CircularLight;
   src: url(./res/fonts/CircularLight.woff2);
 }
+
+@font-face {
+  font-family: CircularCyr;
+  src: url(./res/fonts/CircularCyr.woff2);
+}
