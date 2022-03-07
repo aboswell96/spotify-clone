@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SpotifySearchItem } from '../spotify/spotify';
 import useStyles from './styles.js';
 
-import { TopResult, TopSongs } from './Items';
+import { TopResult, TopSongs, Artists } from './Helpers';
 
 const Search = () => {
   const classes = useStyles();
@@ -32,19 +32,36 @@ const Search = () => {
   return (
     <div className={classes.container}>
       <SearchBar value={searchValue} onChange={onChange} />
-      <div style={{ display: 'flex', gap: '30px' }}>
-        {query &&
-          query.data &&
-          query.data.artists &&
-          query.data.artists.items.length > 0 && (
-            <TopResult artist={query.data.artists.items[0]} />
-          )}
-        {query &&
-          query.data &&
-          query.data.tracks &&
-          query.data.tracks.items.length > 0 && (
-            <TopSongs tracks={query.data.tracks.items} />
-          )}
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '30px' }}>
+          {query &&
+            query.data &&
+            query.data.artists &&
+            query.data.artists.items.length > 0 && (
+              <TopResult artist={query.data.artists.items[0]} />
+            )}
+          {query &&
+            query.data &&
+            query.data.tracks &&
+            query.data.tracks.items.length > 0 && (
+              <TopSongs tracks={query.data.tracks.items} />
+            )}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '30px',
+            marginTop: '30px',
+          }}
+        >
+          {query &&
+            query.data &&
+            query.data.artists &&
+            query.data.artists.items.length > 0 && (
+              <Artists artists={query.data.artists.items} />
+            )}
+        </div>
       </div>
       {searchValue &&
         query &&
