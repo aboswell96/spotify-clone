@@ -58,26 +58,29 @@ export default makeStyles(() => ({
     fontSize: '2em',
     fontFamily: 'CircularBold',
   },
-  song: {
+  songInfo: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: '10px',
     paddingLeft: '10px',
     height: '56px',
-    fontSize: '1em',
-    fontFamily: 'CircularCyr',
-    cursor: 'pointer',
-    '&:hover': { backgroundColor: '#242424', transitionDuration: '0.2s' },
   },
-  song2: {
+  songContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '95%',
     alignItems: 'center',
-    borderRadius: '10px',
-    '&:hover': { backgroundColor: '#242424', transitionDuration: '0.2s' },
+    borderRadius: '3px',
+    fontSize: '1em',
+    fontFamily: 'CircularCyr',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#242424',
+      transitionDuration: '0.2s',
+      filter: 'grayscale(75%)',
+    },
   },
   artist: {
     padding: '17px',

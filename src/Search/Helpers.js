@@ -67,8 +67,8 @@ const Song = (props) => {
   const albumPhoto = props.song.album.images[0].url;
 
   return (
-    <div className={classes.song2}>
-      <div className={classes.song}>
+    <div className={classes.songContainer}>
+      <div className={classes.songInfo}>
         <img
           src={albumPhoto}
           alt="album"
@@ -89,10 +89,15 @@ const Song = (props) => {
           </div>
         </div>
       </div>
-      <div className={classes.song}>
-        <div style={{ marginRight: '5px' }}>
-          {millisToMinutesAndSeconds(props.song.duration_ms)}
-        </div>
+      <div
+        style={{
+          marginRight: '5px',
+          color: '#b3b3b3',
+          fontSize: '14px',
+          fontFamily: 'CircularBook',
+        }}
+      >
+        {millisToMinutesAndSeconds(props.song.duration_ms)}
       </div>
     </div>
   );
