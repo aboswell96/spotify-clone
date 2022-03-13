@@ -6,7 +6,7 @@ export const TopResult = (props) => {
   const classes = useStyles();
   return (
     <div>
-      <div className={classes.fragmentTitle}>Top Result</div>
+      <div className={classes.fragmentTitle}>Top result</div>
       <div className={classes.topResult}>
         <img
           alt="artist"
@@ -48,7 +48,7 @@ export const TopResult = (props) => {
 export const TopSongs = (props) => {
   const classes = useStyles();
   return (
-    <div>
+    <div style={{ 'flex-grow': '1', width: 'auto' }}>
       <div className={classes.fragmentTitle}>Songs</div>
       <div className={classes.tracks}>
         {props.tracks.slice(0, 4).map((item, j) => {
@@ -60,35 +60,49 @@ export const TopSongs = (props) => {
 };
 
 const Song = (props) => {
+  console.log(props);
   const classes = useStyles();
 
   const artists = props.song.artists.map((s) => s.name).join(', ');
   const albumPhoto = props.song.album.images[0].url;
 
   return (
-    <div className={classes.song}>
-      <img
-        src={albumPhoto}
-        alt="album"
-        height="40px"
-        width="40px"
-        borderRadius="3px"
-      ></img>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div>{props.song.name}</div>
-        <div
-          style={{
-            color: '#b3b3b3',
-            fontSize: '14px',
-            fontFamily: 'CircularBook',
-          }}
-        >
-          {artists}
+    <div className={classes.song2}>
+      <div className={classes.song}>
+        <img
+          src={albumPhoto}
+          alt="album"
+          height="40px"
+          width="40px"
+          borderRadius="3px"
+        ></img>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div>{props.song.name}</div>
+          <div
+            style={{
+              color: '#b3b3b3',
+              fontSize: '14px',
+              fontFamily: 'CircularBook',
+            }}
+          >
+            {artists}
+          </div>
+        </div>
+      </div>
+      <div className={classes.song}>
+        <div style={{ marginRight: '5px' }}>
+          {millisToMinutesAndSeconds(props.song.duration_ms)}
         </div>
       </div>
     </div>
   );
 };
+
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+}
 
 export const Artists = (props) => {
   const classes = useStyles();
